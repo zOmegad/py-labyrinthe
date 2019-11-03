@@ -9,9 +9,9 @@ def begin():
 			x_ord.insert(enum, x)
 			enum += 1
 		x_ord[0][0] = "X"
-		start(x_ord)
+		play(x_ord)
 
-def start(level):
+def play(level):
 	print("Bienvenue dans mon labyrinthe, c'est partit : \n")
 	enum = 0
 	start_level = []
@@ -20,9 +20,7 @@ def start(level):
 		start_level.insert(enum, x)
 		print(''.join(map(str, line)))  # transforme chaques list en string
 		enum += 1
-	play(start_level)
 
-def play(start_level):
 	print("Utilisez Z Q S D pour déplacer votre personage et atteindre la fin du niveau, bonne chance")
 	finish = False
 	position_x = 0

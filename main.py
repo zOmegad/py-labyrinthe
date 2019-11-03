@@ -27,54 +27,52 @@ def show_level(level):
 def play(start_level):
 	print("Utilisez Z Q S D pour déplacer votre personage et atteindre la fin du niveau, bonne chance")
 	finish = False
-	position_x = 0
-	position_y = 0
+	position = {"x": 0, "y": 0}
 	while finish != True:
+		print(position["x"])
+		print(position["y"])
 		direction = input()
 		direction = direction.lower()
 		if direction == "d":
-			position_y += 1
-			if start_level[position_x][position_y] == "#":
-				print(position_y)
+			position["y"] += 1
+			if start_level[position["x"]][position["y"]] == "#":
+				print(position["y"])
 				print("Impossible d'aller ici")
-				position_y -=1
+				position["y"] -= 1
 			else:
-				if start_level[position_x][position_y] == '=' : finish = True
-				start_level[position_x][position_y - 1] = " "
-				start_level[position_x][position_y] = "X"
+				if start_level[position["x"]][position["y"]] == '=' : finish = True
+				start_level[position["x"]][position["y"] - 1] = " "
+				start_level[position["x"]][position["y"]] = "X"
 				show_level(start_level)
 		elif direction == "q":
-			position_y -= 1
-			if start_level[position_x][position_y] == "#":
-				print(position_y)
+			position["y"] -= 1
+			if start_level[position["x"]][position["y"]] == "#":
 				print("Impossible d'aller ici")
-				position_y +=1
+				positionv["y"] += 1
 			else:
-				if start_level[position_x][position_y] == '=' : finish = True
-				start_level[position_x][position_y + 1] = " "
-				start_level[position_x][position_y] = "X"
+				if start_level[position["x"]][position["y"]] == '=' : finish = True
+				start_level[position["x"]][position["y"] + 1] = " "
+				start_level[position["x"]][position["y"]] = "X"
 				show_level(start_level)
 		elif direction == "z":
-			position_x -= 1
-			if start_level[position_x][position_y] == "#":
-				print(position_y)
+			position["x"] -= 1
+			if start_level[position["x"]][position["y"]] == "#":
 				print("Impossible d'aller ici")
-				position_x +=1
+				position["x"] += 1
 			else:
-				if start_level[position_x][position_y] == '=' : finish = True
-				start_level[position_x + 1][position_y] = " "
-				start_level[position_x][position_y] = "X"
+				if start_level[position["x"]][position["y"]] == '=' : finish = True
+				start_level[position["x"] + 1][position["y"]] = " "
+				start_level[position["x"]][position["y"]] = "X"
 				show_level(start_level)
 		elif direction == "s":
-			position_x += 1
-			if start_level[position_x][position_y] == "#":
-				print(position_y)
+			position["x"] += 1
+			if start_level[position["x"]][position["y"]] == "#":
 				print("Impossible d'aller ici")
-				position_x -=1
+				position["x"] -= 1
 			else:
-				if start_level[position_x][position_y] == '=' : finish = True
-				start_level[position_x - 1][position_y] = " "
-				start_level[position_x][position_y] = "X"
+				if start_level[position["x"]][position["y"]] == '=' : finish = True
+				start_level[position["x"] - 1][position["y"]] = " "
+				start_level[position["x"]][position["y"]] = "X"
 				show_level(start_level)
 		else:
 			print("Utilise Z Q S ou D")

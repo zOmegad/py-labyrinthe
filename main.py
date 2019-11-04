@@ -19,24 +19,26 @@ def begin():
 			enum += 1
 	play(start_level)
 
+def place_items():
+	pass
 
 def show_level(level):
+	print("\n")
 	for line in level:
 		print(''.join(map(str, line)))  # transforme chaques list en string
 
 def move(start_level, position, finish, edit_pos, direction, suppression):
     if direction == "right_down" : position[edit_pos] += 1
     if direction == "left_up" : position[edit_pos] -= 1
-    if start_level[position["x"]][position["y"]] == "#": 
-        print(position["y"])
+    if start_level[position["x"]][position["y"]] == "#":
         print("Impossible d'aller ici")
-        if position == "right_left" : position[edit_pos] -= 1
+        if direction == "right_down" : position[edit_pos] -= 1
+        if direction == "left_up" : position[edit_pos] += 1
     else:
         if start_level[position["x"]][position["y"]] == "=" : finish[0] = True
         if suppression == "right":
             start_level[position["x"]][position["y"] - 1] = " "
             start_level[position["x"]][position["y"]] = "X"
-            print(finish)
         elif suppression == "left":
             start_level[position["x"]][position["y"] + 1] = " "
             start_level[position["x"]][position["y"]] = "X"
@@ -54,8 +56,6 @@ def play(start_level):
     finish = [False]
     position = {"x": 0, "y": 0}
     while finish[0] == False:
-        print(position["x"])
-        print(position["y"])
         direction = input()
         direction = direction.lower()
         if direction == "d":

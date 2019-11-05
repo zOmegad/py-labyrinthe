@@ -1,3 +1,4 @@
+import random
 def begin(): 
 	with open('level.txt', 'r') as level:
 		lines = level.readlines()
@@ -19,12 +20,17 @@ def begin():
 			enum += 1
 	play(start_level)
 
-def place_items():
-	pass
+def place_items(start_level):
+    items = ["⌘", "♣", "※"]
+    for item in items:
+        random_position_x = random.randint(1,14)
+        random_position_y = random.randint(1,20)
+        start_level[random_position_x][random_position_y] = item
+    
 
-def show_level(level):
+def show_level(start_level):
 	print("\n")
-	for line in level:
+	for line in start_level:
 		print(''.join(map(str, line)))  # transforme chaques list en string
 
 def move(start_level, position, finish, edit_pos, direction, suppression):
@@ -52,6 +58,7 @@ def move(start_level, position, finish, edit_pos, direction, suppression):
         	pass
 
 def play(start_level):
+    place_items(start_level)
     print("Utilisez Z Q S D pour déplacer votre personage et atteindre la fin du niveau, bonne chance")
     finish = [False]
     position = {"x": 0, "y": 0}

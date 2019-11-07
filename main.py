@@ -1,7 +1,7 @@
 import random
 from Game import Game
 from Map import Map
-from items import Item
+from Item import Item
 
 my_map = Map()
 new_game = Game()

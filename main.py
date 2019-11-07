@@ -1,19 +1,17 @@
 import random
-from game import *
+from Game import Game
+from Map import Map
+from items import Item
 
-def begin(): 
-	with open('level.txt', 'r') as level:
-		lines = level.readlines()
-		print("Bienvenue dans mon labyrinthe, c'est partit : \n")
-		enum = 0
-		start_level = []
-		for line in lines:
-			x = list(line)
-			x.pop()
-			start_level.insert(enum, x)
-			enum += 1
-		start_level[0][0] = "X"
-		show_level(start_level)
-	play(start_level)
+my_map = Map()
+new_game = Game()
+my_items = Item()
 
-begin()
+my_items.place_items(start_level=my_map.start_level)
+my_map.show_level()
+
+while new_game.finish == False:
+    new_game.move(start_level=my_map.start_level)
+    my_map.show_level()
+
+new_game.finished()

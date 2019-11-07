@@ -11,7 +11,6 @@ class Game:
         if direction == "d":
             self.position["y"] += 1
             if mymap.start_level[self.position["x"]][self.position["y"]] == "#":
-                print(self.position["y"])
                 print("Impossible d'aller ici")
                 self.position["y"] -=1
             else:
@@ -21,7 +20,6 @@ class Game:
         elif direction == "q":
             self.position["y"] -= 1
             if mymap.start_level[self.position["x"]][self.position["y"]] == "#":
-                print(self.position["y"])
                 print("Impossible d'aller ici")
                 self.position["y"] +=1
             else:
@@ -31,7 +29,6 @@ class Game:
         elif direction == "z":
             self.position["x"] -= 1
             if mymap.start_level[self.position["x"]][self.position["y"]] == "#":
-                print(self.position["y"])
                 print("Impossible d'aller ici")
                 self.position["x"] +=1
             else:
@@ -41,7 +38,6 @@ class Game:
         elif direction == "s":
             self.position["x"] += 1
             if mymap.start_level[self.position["x"]][self.position["y"]] == "#":
-                print(self.position["y"])
                 print("Impossible d'aller ici")
                 self.position["x"] -=1
             else:

@@ -2,16 +2,20 @@ import random
 from Game import Game
 from Map import Map
 from Item import Item
+from Character import Character
 
 my_map = Map()
-new_game = Game()
-my_items = Item()
+game = Game()
+my_item = Item()
+my_character = Character()
 
-my_items.place_items(my_map)
+my_item.place_item(my_map)
+my_map.place_character(my_character)
 my_map.show_level()
 
-while new_game.finish == False:
-    new_game.move(my_map)
+while game.finish == False:
+    game.move(my_map, my_character, my_item)
     my_map.show_level()
+    my_character.show_info()
 
-new_game.finished()
+game.finished(my_character)	

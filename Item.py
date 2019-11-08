@@ -3,11 +3,11 @@ import random
 class Item:
     
     def __init__(self):
-        self.items = ["⌘", "♣", "※"]
+        self.object = ["⌘", "♣", "※"]
 
-    def place_items(self, my_map):
+    def place_item(self, my_map):
 
-        for item in self.items:
+        for item in self.object:
             random_position_x = random.randint(1,14)
             random_position_y = random.randint(1,20)
             i = False

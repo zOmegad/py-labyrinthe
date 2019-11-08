@@ -13,7 +13,9 @@ class Map:
                 x.pop()
                 self.start_level.insert(enum, x)
                 enum += 1
-            self.start_level[0][0] = "X"
+
+    def place_character(self, my_character):
+        self.start_level[0][0] = my_character.body
 
     def show_level(self):
         print("\n")

@@ -1,7 +1,10 @@
+import time
+
 class Game:
 
     def __init__(self):
 
+        self.start_time = time.time() # calculer le temps d'éxecution d'une fonction
         self.finish = False
 
     def move(self, my_map, my_character, my_item):
@@ -79,5 +82,4 @@ class Game:
             print("                                                      ")
 
         else:
-
-            print("Felicitation vous avez finit le labyrinthe")
+            print("Felicitation vous avez finit le labyrinthe en %s secondes." % int(time.time() - self.start_time))

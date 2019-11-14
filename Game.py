@@ -7,67 +7,81 @@ class Game:
         self.start_time = time.time() # calculer le temps d'éxecution d'une fonction
         self.finish = False
 
-    def move(self, my_map, my_character, my_item):
+    def play(self, my_map, my_character, my_item):
 
-        direction = input()
-        direction = direction.lower()
+        my_item.place_item(my_map)
+        my_map.place_character(my_character)
+        my_map.show_level()
 
-        if direction == "d":
-            my_character.position["y"] += 1
-            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
-                print("Impossible d'aller ici")
-                my_character.position["y"] -=1
-
+        # tant que game.finish est False
+        while not self.finish:
+            my_character.direction = input().lower()
+            if my_character.direction == "d":
+                self.move_right(my_map, my_character, my_item)
+            elif my_character.direction == "q":
+                self.move_left(my_map, my_character, my_item)
+            elif my_character.direction == "z":
+                self.move_up(my_map, my_character, my_item)
+            elif my_character.direction == "s":
+                self.move_down(my_map, my_character, my_item)
             else:
-                if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object) : my_character.item_taken += 1
-                if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=' : self.finish = True
-                my_map.start_level[my_character.position["x"]][my_character.position["y"] - 1] = " "
-                my_map.start_level[my_character.position["x"]][my_character.position["y"]] = my_character.body
+                print("Utilisez Z Q S D")
 
-        elif direction == "q":
-            my_character.position["y"] -= 1
+            my_map.show_level()
+            my_character.show_info()
 
-            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
-                print("Impossible d'aller ici")
-                my_character.position["y"] +=1
+        self.finished(my_character)
 
-            else:
-                if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object) : my_character.item_taken += 1
-                if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=' : self.finish = True
-                my_map.start_level[my_character.position["x"]][my_character.position["y"] + 1] = " "
-                my_map.start_level[my_character.position["x"]][my_character.position["y"]] = my_character.body
+    def move_up(self, my_map, my_character, my_item):
+        my_character.position["x"] -= 1
 
-        elif direction == "z":
-            my_character.position["x"] -= 1
-
-            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
-                print("Impossible d'aller ici")
-                my_character.position["x"] +=1
-
-            else:
-                if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object) : my_character.item_taken += 1
-                if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=' : self.finish = True
-                my_map.start_level[my_character.position["x"] + 1][my_character.position["y"]] = " "
-                my_map.start_level[my_character.position["x"]][my_character.position["y"]] = my_character.body
-
-        elif direction == "s":
-
-            my_character.position["x"] += 1
-
-            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
-
-                print("Impossible d'aller ici")
-                my_character.position["x"] -=1
-
-            else:
-                if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object) : my_character.item_taken += 1
-                if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=' : self.finish = True
-                my_map.start_level[my_character.position["x"] - 1][my_character.position["y"]] = " "
-                my_map.start_level[my_character.position["x"]][my_character.position["y"]] = my_character.body
+        if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
+            print("Impossible d'aller ici")
+            my_character.position["x"] +=1
 
         else:
+            if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object) : my_character.item_taken += 1
+            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=' : self.finish = True
+            my_map.start_level[my_character.position["x"] + 1][my_character.position["y"]] = " "
+            my_map.start_level[my_character.position["x"]][my_character.position["y"]] = my_character.body
 
-            print("Utilise Z Q S ou D")
+    def move_down(self, my_map, my_character, my_item):
+        my_character.position["x"] += 1
+
+        if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
+
+            print("Impossible d'aller ici")
+            my_character.position["x"] -=1
+
+        else:
+            if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object) : my_character.item_taken += 1
+            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=' : self.finish = True
+            my_map.start_level[my_character.position["x"] - 1][my_character.position["y"]] = " "
+            my_map.start_level[my_character.position["x"]][my_character.position["y"]] = my_character.body 
+
+    def move_left(self, my_map, my_character, my_item): 
+        my_character.position["y"] -= 1
+
+        if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
+            print("Impossible d'aller ici")
+            my_character.position["y"] +=1
+
+        else:
+            if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object) : my_character.item_taken += 1
+            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=' : self.finish = True
+            my_map.start_level[my_character.position["x"]][my_character.position["y"] + 1] = " "
+            my_map.start_level[my_character.position["x"]][my_character.position["y"]] = my_character.body
+    
+    def move_right(self, my_map, my_character, my_item): 
+        my_character.position["y"] += 1
+        if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
+            print("Impossible d'aller ici")
+            my_character.position["y"] -=1
+        else:
+            if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object) : my_character.item_taken += 1
+            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=' : self.finish = True
+            my_map.start_level[my_character.position["x"]][my_character.position["y"] - 1] = " "
+            my_map.start_level[my_character.position["x"]][my_character.position["y"]] = my_character.body
 
     def finished(self, my_character):
         if my_character.item_taken != 3:

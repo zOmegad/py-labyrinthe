@@ -4,7 +4,7 @@ from random import randrange
 class Item:
     
     def __init__(self):
-        self.object = ["⌘", "♣", "※"]
+        self.object = ["A", "B", "C"]
 
     def place_item(self, my_map):
 

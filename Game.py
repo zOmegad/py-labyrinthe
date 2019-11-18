@@ -1,4 +1,5 @@
 import time
+import pygame
 
 class Game:
 
@@ -7,11 +8,13 @@ class Game:
         self.start_time = time.time() # calculer le temps d'éxecution d'une fonction
         self.finish = False
 
-    def play(self, my_map, my_character, my_item):
+    def play(self, my_map, my_character, my_item, display_map):
 
         my_item.place_item(my_map)
         my_map.place_character(my_character)
         my_map.show_level()
+        display_map.start_screen()
+        display_map.generate(my_map)
 
         # tant que game.finish est False
         while not self.finish:

@@ -1,5 +1,6 @@
 import time
 import pygame
+from pygame.locals import *
 
 class Game:
 
@@ -18,17 +19,17 @@ class Game:
 
         # tant que game.finish est False
         while not self.finish:
-            my_character.direction = input().lower()
-            if my_character.direction == "d":
-                self.move_right(my_map, my_character, my_item)
-            elif my_character.direction == "q":
-                self.move_left(my_map, my_character, my_item)
-            elif my_character.direction == "z":
-                self.move_up(my_map, my_character, my_item)
-            elif my_character.direction == "s":
-                self.move_down(my_map, my_character, my_item)
-            else:
-                print("Utilisez Z Q S D")
+            for event in pygame.event.get():
+                if event.type == KEYDOWN and event.key == K_RIGHT:
+                    self.move_right(my_map, my_character, my_item)
+                elif event.type == KEYDOWN and event.key == K_LEFT:
+                    self.move_left(my_map, my_character, my_item)
+                elif event.type == KEYDOWN and event.key == K_UP:
+                    self.move_up(my_map, my_character, my_item)
+                elif event.type == KEYDOWN and event.key == K_DOWN:
+                    self.move_down(my_map, my_character, my_item)
+                else:
+                    print("Utilisez Z Q S D")
 
             my_map.show_level()
             my_character.show_info()

@@ -27,6 +27,8 @@ class Game:
                     self.move_up(my_map, my_character, my_item)
                 elif event.type == KEYDOWN and event.key == K_DOWN:
                     self.move_down(my_map, my_character, my_item)
+                elif event.type == KEYDOWN and event.key == K_q:
+                    pygame.quit()
                 else:
                     pass
 

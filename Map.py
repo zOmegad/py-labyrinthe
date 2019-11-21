@@ -53,8 +53,11 @@ class Map:
                     pass
                 x_line += 30 # pixels
             y_line += 30
-        life_bar = self.myfont.render('Vies = ' + str(my_character.live) + "             Items : " + str(my_character.item_taken), False, (255, 255, 255))
-        self.fenetre.blit(life_bar,(20,420))
+
+        # show info at the bottom
+        info_bar = self.myfont.render('Vies = ' + str(my_character.live) + "             Items : " + str(my_character.item_taken), False, (255, 255, 255))
+        self.fenetre.blit(info_bar,(20,420))
+
         pygame.display.flip()
 
     def start_screen(self):

@@ -12,7 +12,7 @@ class Map:
         self.mc_gyver_position = {"x": 0, "y": 0}
 
 
-        self.fenetre = pygame.display.set_mode((450, 470))
+        self.fenetre = pygame.display.set_mode((450, 450))
         self.myfont = pygame.font.Font('ressource/Minecraftia-Regular.ttf', 17)
         self.start_image = pygame.image.load("ressource/startscreen450.jpg").convert()
         self.fond = pygame.image.load("ressource/fond.jpg").convert()
@@ -34,11 +34,7 @@ class Map:
     def place_character(self, my_character):
         self.start_level[0][0] = my_character.body
 
-    def show_info(self, my_character):
-        print("Nombre de vie : " + str(my_character.live))
-        print("Nombre d'item(s) récupéré(s) : " + str(my_character.item_taken))
-
-    def show_level(self):
+    def show_level(self, my_character):
         # Pour chaques lists on prend les valeurs et on vérifie si c'est un mur ou non
         y_line = 0
         self.fenetre.blit(self.fond, (0,0))
@@ -57,6 +53,8 @@ class Map:
                     pass
                 x_line += 30 # pixels
             y_line += 30
+        life_bar = self.myfont.render('Vies = ' + str(my_character.live) + "             Items : " + str(my_character.item_taken), False, (255, 255, 255))
+        self.fenetre.blit(life_bar,(20,420))
         pygame.display.flip()
 
     def start_screen(self):

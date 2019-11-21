@@ -13,9 +13,8 @@ class Game:
 
         my_item.place_item(my_map)
         my_map.place_character(my_character)
-        my_map.show_level()
+        my_map.show_level(my_character)
         my_map.start_screen()
-        my_map.show_level()
 
         # tant que game.finish est False
         while not self.finish:
@@ -31,8 +30,7 @@ class Game:
                 else:
                     pass
 
-            my_map.show_level()
-            my_map.show_info(my_character)
+            my_map.show_level(my_character)
 
         self.finished(my_character)
 

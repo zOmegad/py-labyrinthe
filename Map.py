@@ -1,21 +1,25 @@
 import pygame
-import time
+from pygame.locals import *
 
 class Map:
 
     def __init__(self):
 
         pygame.init()
+        pygame.font.init()
+        
+        self.start_level = []
         self.mc_gyver_position = {"x": 0, "y": 0}
-        self.fenetre = pygame.display.set_mode((450, 450))
+
+
+        self.fenetre = pygame.display.set_mode((450, 470))
+        self.myfont = pygame.font.Font('ressource/Minecraftia-Regular.ttf', 17)
         self.start_image = pygame.image.load("ressource/startscreen450.jpg").convert()
         self.fond = pygame.image.load("ressource/fond.jpg").convert()
         self.mcgyver = pygame.image.load("ressource/MacGyver.png").convert_alpha()
         self.mur = pygame.image.load("ressource/mur.jpg").convert()
         self.arrivee = pygame.image.load("ressource/arrive.jpg").convert()
         self.bitcoin = pygame.image.load("ressource/bitcoin.png").convert_alpha()
-
-        self.start_level = []
 
         with open('level.txt', 'r') as level:
             lines = level.readlines()
@@ -30,11 +34,11 @@ class Map:
     def place_character(self, my_character):
         self.start_level[0][0] = my_character.body
 
-    def show_level(self):
-        print("\n")
-        for line in self.start_level:
-            print(''.join(map(str, line)))
+    def show_info(self, my_character):
+        print("Nombre de vie : " + str(my_character.live))
+        print("Nombre d'item(s) récupéré(s) : " + str(my_character.item_taken))
 
+    def show_level(self):
         # Pour chaques lists on prend les valeurs et on vérifie si c'est un mur ou non
         y_line = 0
         self.fenetre.blit(self.fond, (0,0))
@@ -58,4 +62,11 @@ class Map:
     def start_screen(self):
 
         self.fenetre.blit(self.start_image, (0,0))
+        textsurface = self.myfont.render('Appuyez sur une touche pour continuer', False, (237, 156, 17))
+        self.fenetre.blit(textsurface,(20,300))
         pygame.display.flip()
+        ok = False
+        while not ok:
+            for event in pygame.event.get():
+                if event.type == KEYDOWN:
+                    ok = True

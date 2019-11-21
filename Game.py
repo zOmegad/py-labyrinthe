@@ -29,10 +29,10 @@ class Game:
                 elif event.type == KEYDOWN and event.key == K_DOWN:
                     self.move_down(my_map, my_character, my_item)
                 else:
-                    print("Utilisez Z Q S D")
+                    pass
 
             my_map.show_level()
-            my_character.show_info()
+            my_map.show_info(my_character)
 
         self.finished(my_character)
 
@@ -40,7 +40,6 @@ class Game:
         my_character.position["x"] -= 1
 
         if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
-            print("Impossible d'aller ici")
             my_character.position["x"] +=1
 
         else:
@@ -53,8 +52,6 @@ class Game:
         my_character.position["x"] += 1
 
         if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
-
-            print("Impossible d'aller ici")
             my_character.position["x"] -=1
 
         else:
@@ -67,7 +64,6 @@ class Game:
         my_character.position["y"] -= 1
 
         if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
-            print("Impossible d'aller ici")
             my_character.position["y"] +=1
 
         else:
@@ -79,7 +75,6 @@ class Game:
     def move_right(self, my_map, my_character, my_item): 
         my_character.position["y"] += 1
         if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
-            print("Impossible d'aller ici")
             my_character.position["y"] -=1
         else:
             if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object) : my_character.item_taken += 1

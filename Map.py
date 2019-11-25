@@ -13,7 +13,9 @@ class Map:
 
 
         self.fenetre = pygame.display.set_mode((450, 450))
+        self.background = pygame.image.load("ressource/background.jpg").convert()
         self.myfont = pygame.font.Font('ressource/Minecraftia-Regular.ttf', 17)
+        self.myfont_minecrafter = pygame.font.Font('ressource/Minecrafter.Reg.ttf', 60)
         self.start_image = pygame.image.load("ressource/startscreen450.jpg").convert()
         self.fond = pygame.image.load("ressource/fond.jpg").convert()
         self.mcgyver = pygame.image.load("ressource/MacGyver.png").convert_alpha()
@@ -23,7 +25,7 @@ class Map:
 
         with open('level.txt', 'r') as level:
             lines = level.readlines()
-            print("Bienvenue dans mon labyrinthe, c'est partit : \n")
+            print("Program launched")
             enum = 0
             for line in lines:
                 x = list(line)
@@ -55,7 +57,7 @@ class Map:
             y_line += 30
 
         # show info at the bottom
-        info_bar = self.myfont.render('Vies = ' + str(my_character.live) + "             Items : " + str(my_character.item_taken), False, (255, 255, 255))
+        info_bar = self.myfont.render('Lives = ' + str(my_character.live) + "             Items : " + str(my_character.item_taken), False, (255, 255, 255))
         self.fenetre.blit(info_bar,(20,420))
 
         pygame.display.flip()
@@ -63,11 +65,38 @@ class Map:
     def start_screen(self):
 
         self.fenetre.blit(self.start_image, (0,0))
-        textsurface = self.myfont.render('Appuyez sur une touche pour continuer', False, (237, 156, 17))
-        self.fenetre.blit(textsurface,(20,300))
+        textsurface = self.myfont.render('Press any key to start', False, (237, 156, 17))
+        text_surface_rect = textsurface.get_rect(center=(450/2, 300))
+        self.fenetre.blit(textsurface, text_surface_rect)
         pygame.display.flip()
         ok = False
         while not ok:
             for event in pygame.event.get():
                 if event.type == KEYDOWN:
                     ok = True
+
+    def finished(self, my_character):
+
+        close = False
+        while not close:
+            if my_character.item_taken != 3:
+                self.fenetre.blit(self.background, (0,0))
+                go_message = self.myfont.render("You didn't collect all bitcoins", False, (255, 255, 255))
+                go_message_rect = go_message.get_rect(center=(450/2, 300))
+                self.fenetre.blit(go_message, go_message_rect)
+                textsurface = self.myfont_minecrafter.render('GAME OVER', False, (237, 156, 17))
+                self.fenetre.blit(textsurface,(40,170))
+                pygame.display.flip()
+                for event in pygame.event.get():
+                    if event.type == KEYDOWN:
+                        close = True
+
+            else:
+                self.fenetre.blit(self.background, (0,0))
+                gg_message = self.myfont_minecrafter.render("GG WP", False, (255, 255, 255))
+                gg_message_rect = gg_message.get_rect(center=(450/2, 170))
+                self.fenetre.blit(gg_message, gg_message_rect)
+                pygame.display.flip()
+                for event in pygame.event.get():
+                    if event.type == KEYDOWN:
+                        close = True

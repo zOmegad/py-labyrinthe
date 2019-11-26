@@ -14,7 +14,7 @@ class Game:
         my_map.show_level(my_character)
         my_map.start_screen()
 
-        # tant que game.finish est False
+        # while finish is false continue
         while not self.finish:
             for event in pygame.event.get():
                 if event.type == KEYDOWN and event.key == K_RIGHT:
@@ -41,6 +41,7 @@ class Game:
             my_character.position["x"] +=1
 
         else:
+            # if there is an item at the position in the list of items, add 1 to the count
             if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object) : my_character.item_taken += 1
             if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=' : self.finish = True
             my_map.start_level[my_character.position["x"] + 1][my_character.position["y"]] = " "

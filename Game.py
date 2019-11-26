@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 
+
 class Game:
 
     def __init__(self):
@@ -38,47 +39,61 @@ class Game:
         my_character.position["x"] -= 1
 
         if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
-            my_character.position["x"] +=1
+            my_character.position["x"] += 1
 
         else:
             # if there is an item at the position in the list of items, add 1 to the count
-            if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object) : my_character.item_taken += 1
-            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=' : self.finish = True
-            my_map.start_level[my_character.position["x"] + 1][my_character.position["y"]] = " "
-            my_map.start_level[my_character.position["x"]][my_character.position["y"]] = my_character.body
+            if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object):
+                my_character.item_taken += 1
+            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=':
+                self.finish = True
+            my_map.start_level[my_character.position["x"] +
+                               1][my_character.position["y"]] = " "
+            my_map.start_level[my_character.position["x"]
+                               ][my_character.position["y"]] = my_character.body
 
     def move_down(self, my_map, my_character, my_item):
         my_character.position["x"] += 1
 
         if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
-            my_character.position["x"] -=1
+            my_character.position["x"] -= 1
 
         else:
-            if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object) : my_character.item_taken += 1
-            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=' : self.finish = True
-            my_map.start_level[my_character.position["x"] - 1][my_character.position["y"]] = " "
-            my_map.start_level[my_character.position["x"]][my_character.position["y"]] = my_character.body 
+            if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object):
+                my_character.item_taken += 1
+            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=':
+                self.finish = True
+            my_map.start_level[my_character.position["x"] -
+                               1][my_character.position["y"]] = " "
+            my_map.start_level[my_character.position["x"]
+                               ][my_character.position["y"]] = my_character.body
 
-    def move_left(self, my_map, my_character, my_item): 
+    def move_left(self, my_map, my_character, my_item):
         my_character.position["y"] -= 1
 
         if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
-            my_character.position["y"] +=1
+            my_character.position["y"] += 1
 
         else:
-            if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object) : my_character.item_taken += 1
-            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=' : self.finish = True
-            my_map.start_level[my_character.position["x"]][my_character.position["y"] + 1] = " "
-            my_map.start_level[my_character.position["x"]][my_character.position["y"]] = my_character.body
-    
-    def move_right(self, my_map, my_character, my_item): 
+            if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object):
+                my_character.item_taken += 1
+            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=':
+                self.finish = True
+            my_map.start_level[my_character.position["x"]
+                               ][my_character.position["y"] + 1] = " "
+            my_map.start_level[my_character.position["x"]
+                               ][my_character.position["y"]] = my_character.body
+
+    def move_right(self, my_map, my_character, my_item):
         my_character.position["y"] += 1
         if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == "#":
-            my_character.position["y"] -=1
+            my_character.position["y"] -= 1
         else:
-            if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object) : my_character.item_taken += 1
-            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=' : self.finish = True
-            my_map.start_level[my_character.position["x"]][my_character.position["y"] - 1] = " "
-            my_map.start_level[my_character.position["x"]][my_character.position["y"]] = my_character.body
-
-    
+            if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object):
+                my_character.item_taken += 1
+            if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=':
+                self.finish = True
+            my_map.start_level[my_character.position["x"]
+                               ][my_character.position["y"] - 1] = " "
+            my_map.start_level[my_character.position["x"]
+                               ][my_character.position["y"]] = my_character.body

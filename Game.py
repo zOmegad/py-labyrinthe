@@ -12,7 +12,6 @@ class Game:
 
         my_item.place_item(my_map)
         my_map.place_character(my_character)
-        my_map.show_level(my_character)
         my_map.start_screen()
 
         # while finish is false continue
@@ -42,7 +41,7 @@ class Game:
             my_character.position["x"] += 1
 
         else:
-            # if there is an item at the position in the list of items, add 1 to the count
+            # if there is an item at the position in the list of items, add 1 to the count  
             if any(my_map.start_level[my_character.position["x"]][my_character.position["y"]] in s for s in my_item.object):
                 my_character.item_taken += 1
             if my_map.start_level[my_character.position["x"]][my_character.position["y"]] == '=':

@@ -27,3 +27,4 @@ class Item:
                 random_item = my_map.start_level[random_position_x][random_index]
 
             my_map.start_level[random_position_x][random_index] = item
+            
